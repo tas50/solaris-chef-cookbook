@@ -8,3 +8,4 @@ version          '0.1.0'
 supports         'solaris2'
 source_url       'https://github.com/oracle/solaris-chef-cookbook'
 issues_url       'https://github.com/oracle/solaris-chef-cookbook/issues'
+chef_version     '>= 12.5' if respond_to?(:chef_version)

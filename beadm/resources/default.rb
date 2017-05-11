@@ -33,7 +33,7 @@ attribute :refreservation, kind_of: String, default: 'none'
 attribute :dedup, kind_of: String, equal_to: %w(on off), default: 'off'
 attribute :options, kind_of: Hash, default: {}
 
-attribute :activate, kind_of: [TrueClass, FalseClass], default: true
+attribute :activate, kind_of: [true, false], default: true
 attribute :info, kind_of: Mixlib::ShellOut, default: nil
 attribute :list, kind_of: Mixlib::ShellOut, default: nil
 attribute :current_props, kind_of: Hash, default: nil

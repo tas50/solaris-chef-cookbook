@@ -23,7 +23,7 @@ def whyrun_supported?
 end
 
 def load_current_resource
-  @beadm = Chef::Resource::Beadm.new(new_resource.name)
+  @beadm = Chef::Resource.resource_for_node(new_resource.declared_type, run_context.node).new(new_resource.name)
   @beadm.name(new_resource.name)
   @beadm.options(new_resource.options)
   @beadm.mountpoint(new_resource.mountpoint)

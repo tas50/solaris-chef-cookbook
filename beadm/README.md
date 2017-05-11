@@ -1,100 +1,55 @@
-beadm Cookbook
-==============
-Beadm cookbook is for managing ZFS Boot Environments (BEs), cookbook
-intended to be used by system administrators for managing multiple 
-Oracle Solaris instances on a single system.
+# beadm Cookbook
 
+Beadm cookbook is for managing ZFS Boot Environments (BEs), cookbook intended to be used by system administrators for managing multiple Oracle Solaris instances on a single system.
 
-Requirements
-------------
+## Requirements
+
 - Chef 12.5 or higher
 - Oracle Solaris 11 and above
 
+## Attributes
 
-Attributes
-----------
 Beadm cookbook attributes.
 
-#### beadm::default
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>name</tt></td>
-    <td>String</td>
-    <td>BE name</td>
-    <td><tt></tt></td>
-  </tr>
-  <tr>
-    <td><tt>new_be</tt></td>
-    <td>String</td>
-    <td>Target BE name</td>
-    <td><tt></tt></td>
-  </tr>
-  <tr>
-    <td><tt>mountpoint</tt></td>
-    <td>String</td>
-    <td>filesystem mountpoint</td>
-    <td><tt></tt></td>
-  </tr>
-  <tr>
-    <td><tt>options</tt></td>
-    <td>Hash</td>
-    <td>ZFS properties</td>
-    <td><tt>true</tt></td>
-  </tr>
+### beadm::default
 
+Key        | Type   | Description           | Default
+---------- | ------ | --------------------- | -------
+name       | String | BE name               |
+new_be     | String | Target BE name        |
+mountpoint | String | filesystem mountpoint |
+options    | Hash   | ZFS properties        | true
 
-</table>
+## Usage
 
-Usage
------
-#### beadm::default
+### beadm::default
 
+## Creating a newbe
 
-##Creating a newbe
+beadm 'newbe' do action :create end
 
-beadm 'newbe' do
-        action :create
-end
+## renaming a BE
 
+beadm 'testbe' do action :rename new_be "testing" end
 
-##renaming a BE
-beadm 'testbe' do
-        action :rename
-	new_be "testing"
-end
+## Setting ZFS options while creation of BE
 
-##Setting ZFS options while creation of BE
-beadm 'newbe2' do
-  options ({
-             'recordsize' => '128K', 'compression' => 'on'
-           })
-  action :create
-end
+beadm 'newbe2' do options ({ 'recordsize' => '128K', 'compression' => 'on' }) action :create end
 
-##Mounting of BE
-beadm 'newbe2' do
-  mountpoint "/mnt"
-  action :mount
-end
+## Mounting of BE
 
-##Mounting of BE
-beadm 'newbe2' do
-  action :umount
-end
+beadm 'newbe2' do mountpoint "/mnt" action :mount end
 
-##Pattern based destroy of BE
-beadm 'newbe*' do
-	action :destroy_pattern
-end
+## Mounting of BE
 
-Contributing
-------------
+beadm 'newbe2' do action :umount end
+
+## Pattern based destroy of BE
+
+beadm 'newbe*' do action :destroy_pattern end
+
+## Contributing
+
 Process for contributing.
 
 1. Fork the repository on Github
@@ -104,8 +59,8 @@ Process for contributing.
 5. Run the tests, ensuring they all pass
 6. Submit a Pull Request using Github
 
-License and Authors
--------------------
+## License and Authors
+
 - Author:: Pradhap Devarajan([pradhap.devarajan@oracle.com](mailto:pradhap.devarajan@oracle.com))
 
 ```text

@@ -18,7 +18,7 @@
 actions :create, :destroy, :activate, :destroy_pattern, :mount, :umount, :rename
 default_action :create
 
-attribute :name, kind_of: String
+attribute :name, kind_of: String, name_attribute: true
 attribute :new_be, kind_of: String
 attribute :mountpoint, kind_of: String, default: nil
 

@@ -35,18 +35,18 @@ end
 
 action :create do
   unless created?
-    converge_by "create beadm #{@beadm.name}" do
-      beadm_options = ''
-      if @beadm.options.empty?
-        Chef::Log.info('beadm options not passed')
-      else
-        Chef::Log.info('beadm options passed')
-        @beadm.options.each do |key, val|
-          tmp = "-o #{key}=#{val} "
-          beadm_options += tmp
-        end
+    beadm_options = ''
+    if @beadm.options.empty?
+      Chef::Log.info('beadm options not passed')
+    else
+      Chef::Log.info('beadm options passed')
+      @beadm.options.each do |key, val|
+        tmp = "-o #{key}=#{val} "
+        beadm_options += tmp
       end
+    end
 
+    converge_by "create beadm #{@beadm.name}" do
       shell_out!("beadm create #{@beadm.name}")
 
       shell_out!("beadm activate #{@beadm.name}") if @beadm.activate == true

@@ -15,13 +15,14 @@
 #
 #
 
-actions :create, :destroy, :activate, :destroy_pattern,:mount,:umount,:rename
+actions :create, :destroy, :activate, :destroy_pattern, :mount, :umount, :rename
+default_action :create
 
 attribute :name, kind_of: String
 attribute :new_be, kind_of: String
 attribute :mountpoint, kind_of: String, default: nil
 
-#zfs properties
+# zfs properties
 attribute :recordsize, kind_of: String, default: '128K'
 attribute :atime, kind_of: String, equal_to: %w(on off), default: 'on'
 attribute :compression, kind_of: String, equal_to: ['on', 'off', 'lzjb', 'gzip', 'gzip-1', 'gzip-2', 'gzip-3', 'gzip-4', 'gzip-5', 'gzip-6', 'gzip-7', 'gzip-8', 'gzip-9', 'lz4'], default: 'off'
@@ -32,13 +33,8 @@ attribute :refreservation, kind_of: String, default: 'none'
 attribute :dedup, kind_of: String, equal_to: %w(on off), default: 'off'
 attribute :options, kind_of: Hash, default: {}
 
-attribute :activate, kind_of: [TrueClass, FalseClass], :default => true
+attribute :activate, kind_of: [TrueClass, FalseClass], default: true
 attribute :info, kind_of: Mixlib::ShellOut, default: nil
 attribute :list, kind_of: Mixlib::ShellOut, default: nil
 attribute :current_props, kind_of: Hash, default: nil
 attribute :desired_props, kind_of: Hash, default: nil
-
-def initialize(*args)
-  super
-  @action = :create
-end
